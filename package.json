@@ -1,25 +1,34 @@
 {
-  "name": "adminreact",
+  "name": "todo-react-parse",
   "version": "1.0.0",
-  "description": "Features: - Admin panel - Socket server for real time data - Graphs in real time - React stuff",
-  "main": "index.js",
+  "description": "todo react and parse",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "browserify": "^10.2.6",
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-serve": "^1.0.0",
+    "gulp-watch": "^4.3.2",
+    "parse": "^1.5.0",
+    "parse-react": "^0.4.2",
+    "react": "^0.13.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/albertovillalobos/adminreact.git"
+    "url": "git+https://github.com/albertovillalobos/todo-react-parse.git"
   },
+  "keywords": [
+    "todo",
+    "react",
+    "parse"
+  ],
   "author": "alberto villalobos",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/albertovillalobos/adminreact/issues"
+    "url": "https://github.com/albertovillalobos/todo-react-parse/issues"
   },
-  "homepage": "https://github.com/albertovillalobos/adminreact#readme",
-  "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-connect": "^2.2.0",
-    "gulp-serve": "^1.0.0",
-    "gulp-watch": "^4.3.1"
-  }
+  "homepage": "https://github.com/albertovillalobos/todo-react-parse#readme"
 }
