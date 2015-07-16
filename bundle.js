@@ -6,7 +6,7 @@ var Parse = require('parse').Parse;
 
 Parse.initialize('fUnC8PIBgPR26VUGhbsZFH4tStFUFyOZJ6baLo8O', 'CkPiEsxSHfqtriaJ266t2yknRXArxBy1lVs5WQvI');
 
-var data = [{ author: 'Pete Hunt', text: 'This is one comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }];
+var data = [{ author: 'Pete Hunt', text: 'This is one comment' }, { author: 'how about no?', text: 'This is *another* comment' }, { author: 'how about yeah?', text: 'This is *another* comment' }, { author: 'Oh lol', text: 'This is *another* comment' }, { author: 'asdf', text: 'This is *another* comment' }, { author: '1243', text: 'This is *another* comment' }, { author: 'nope', text: 'This is *another* comment' }, { author: 'asdfmzx', text: 'This is *another* comment' }, { author: 'asd', text: 'This is *another* comment' }];
 
 // tutorial1.js
 var CommentBox = React.createClass({
@@ -37,7 +37,6 @@ var CommentList = React.createClass({
         comment.text
       );
     });
-    console.log(commentNodes);
 
     return React.createElement(
       'div',

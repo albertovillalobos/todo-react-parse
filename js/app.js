@@ -6,14 +6,14 @@ Parse.initialize("fUnC8PIBgPR26VUGhbsZFH4tStFUFyOZJ6baLo8O", "CkPiEsxSHfqtriaJ26
 
 var data = [
   {author: "Pete Hunt", text: "This is one comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"},
+  {author: "how about no?", text: "This is *another* comment"},
+  {author: "how about yeah?", text: "This is *another* comment"},
+  {author: "Oh lol", text: "This is *another* comment"},
+  {author: "asdf", text: "This is *another* comment"},
+  {author: "1243", text: "This is *another* comment"},
+  {author: "nope", text: "This is *another* comment"},
+  {author: "asdfmzx", text: "This is *another* comment"},
+  {author: "asd", text: "This is *another* comment"},
 
 ];
 
@@ -40,8 +40,7 @@ var CommentList = React.createClass({
         </Comment>
       );
     });
-    console.log(commentNodes);
-    
+
     return (
       <div className="commentList">
         {commentNodes}
