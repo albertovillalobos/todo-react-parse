@@ -14,7 +14,7 @@
     "react": "^0.13.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "watchify -o js/bundle.js -v -d js/app.js"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,10 @@
   "bugs": {
     "url": "https://github.com/albertovillalobos/todo-react-parse/issues"
   },
-  "homepage": "https://github.com/albertovillalobos/todo-react-parse#readme"
+  "homepage": "https://github.com/albertovillalobos/todo-react-parse#readme",
+  "devDependencies": {
+    "browserify": "^10.2.6",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.3"
+  }
 }
