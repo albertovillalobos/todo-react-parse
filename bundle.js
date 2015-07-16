@@ -21,7 +21,7 @@ var CommentBox = React.createClass({
         null,
         'Comments'
       ),
-      React.createElement(CommentList, null)
+      React.createElement(CommentList, { data: this.props.data })
     );
   }
 });
@@ -76,7 +76,7 @@ var Comment = React.createClass({
   }
 });
 
-React.render(React.createElement(CommentBox, null), document.getElementById('app'));
+React.render(React.createElement(CommentBox, { data: data }), document.getElementById('app'));
 
 },{"parse":3,"react":158}],2:[function(require,module,exports){
 // shim for using process in browser

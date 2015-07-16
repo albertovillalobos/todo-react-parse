@@ -14,7 +14,7 @@ var data = [
   {author: "Jordan Walke", text: "This is *another* comment"},
   {author: "Jordan Walke", text: "This is *another* comment"},
   {author: "Jordan Walke", text: "This is *another* comment"},
-  
+
 ];
 
 
@@ -25,7 +25,7 @@ var CommentBox = React.createClass({
     return (
       <div className="commentBox">
         <h1>Comments</h1>
-        <CommentList/>
+        <CommentList data={this.props.data} />
       </div>
     );
   }
@@ -66,6 +66,6 @@ var Comment = React.createClass({
 })
 
 React.render(
-  <CommentBox />,
+  <CommentBox data={data}/>,
   document.getElementById('app')
 );
