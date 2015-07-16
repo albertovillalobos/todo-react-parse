@@ -1,9 +1,10 @@
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var gulp = require('gulp');
+var connect = require('gulp-connect');
+var watch = require('gulp-watch');
+var babelify = require('babelify');
 
-var gulp = require('gulp'),
-  connect = require('gulp-connect'),
-  watch = require('gulp-watch');
 
 
 gulp.task('webserver', function() {
@@ -12,16 +13,10 @@ gulp.task('webserver', function() {
   });
 });
 
-gulp.task('browserify', function() {
-    return browserify('./src/javascript/app.js').bundle()
-        // vinyl-source-stream makes the bundle compatible with gulp
-        .pipe(source('bundle.js')) // Desired filename
-        // Output the file
-        .pipe(gulp.dest('./build/'));
-});
 
 gulp.task('browserify', function() {
-    return browserify('./js/app.js').bundle()
+
+    return browserify('./js/app.js').transform(babelify).bundle()
         // vinyl-source-stream makes the bundle compatible with gulp
         .pipe(source('bundle.js')) // Desired filename
         // Output the file
@@ -40,4 +35,4 @@ gulp.task('watch', function() {
   gulp.watch('js/*.js', ['browserify','reload']);
 })
 
-gulp.task('default', ['webserver', 'watch']);
+gulp.task('default', ['browserify','webserver', 'watch']);

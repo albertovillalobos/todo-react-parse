@@ -1,8 +1,82 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var Parse = require('parse').Parse;
 
-Parse.initialize("fUnC8PIBgPR26VUGhbsZFH4tStFUFyOZJ6baLo8O", "CkPiEsxSHfqtriaJ266t2yknRXArxBy1lVs5WQvI");
+Parse.initialize('fUnC8PIBgPR26VUGhbsZFH4tStFUFyOZJ6baLo8O', 'CkPiEsxSHfqtriaJ266t2yknRXArxBy1lVs5WQvI');
+
+var data = [{ author: 'Pete Hunt', text: 'This is one comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }, { author: 'Jordan Walke', text: 'This is *another* comment' }];
+
+// tutorial1.js
+var CommentBox = React.createClass({
+  displayName: 'CommentBox',
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      { className: 'commentBox' },
+      React.createElement(
+        'h1',
+        null,
+        'Comments'
+      ),
+      React.createElement(CommentList, null)
+    );
+  }
+});
+
+var CommentList = React.createClass({
+  displayName: 'CommentList',
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      { className: 'CommentList' },
+      React.createElement(
+        Comment,
+        { author: 'Pete Hunt' },
+        'This is one comment'
+      ),
+      React.createElement(
+        Comment,
+        { author: 'Jordan Walke' },
+        'This is another comment'
+      )
+    );
+  }
+});
+
+var CommentForm = React.createClass({
+  displayName: 'CommentForm',
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      { className: 'commentForm' },
+      'Hello, world! I am a CommentForm.'
+    );
+  }
+});
+
+var Comment = React.createClass({
+  displayName: 'Comment',
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      { className: 'comment' },
+      React.createElement(
+        'h2',
+        { className: 'commentAuthor' },
+        this.props.author
+      ),
+      this.props.children
+    );
+  }
+});
+
+React.render(React.createElement(CommentBox, null), document.getElementById('app'));
 
 },{"parse":3,"react":158}],2:[function(require,module,exports){
 // shim for using process in browser
