@@ -14,11 +14,6 @@ var CommentBox = React.createClass({
     return React.createElement(
       'div',
       { className: 'commentBox' },
-      React.createElement(
-        'h1',
-        null,
-        'Comments'
-      ),
       React.createElement(CommentList, null)
     );
   }
@@ -35,21 +30,67 @@ var CommentList = React.createClass({
   },
 
   render: function render() {
-    console.log('data', this.data);
+    // console.log('data',this.data);
     var commentNodes = this.data.comments.map(function (comment) {
-      return React.createElement(
-        'p',
-        null,
-        comment.info
+      return (
+        // <p key={comment.id}>{comment.info}</p>
+        React.createElement(Comment, { key: comment.id, info: comment.info })
       );
     });
 
     return React.createElement(
       'div',
-      { className: 'commentList' },
+      { className: 'CommentList' },
+      React.createElement(CommentInput, null),
       commentNodes
     );
   }
+});
+
+var Comment = React.createClass({
+  displayName: 'Comment',
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      { className: 'Comment' },
+      this.props.info
+    );
+  }
+});
+
+var CommentInput = React.createClass({
+  displayName: 'CommentInput',
+
+  render: function render() {
+    return React.createElement('input', {
+      className: 'CommentInput',
+      type: 'text',
+      placeholder: 'Enter a comment...',
+      submit: this.addComment,
+      onChange: this.onChange,
+      onKeyDown: this.onKeyDown
+    });
+  },
+
+  addComment: function addComment() {
+    // ParseReact.Mutation.Create("Coment")
+    ParseReact.Mutation.Create('Comment', { info: this.state.value }).dispatch();
+  },
+
+  onChange: function onChange(e) {
+    this.setState({
+      value: e.target.value
+    });
+  },
+
+  onKeyDown: function onKeyDown(e) {
+    if (e.keyCode === 13) {
+      this.addComment();
+      e.target.value = '';
+    }
+  }
+
 });
 
 React.render(React.createElement(CommentBox, null), document.getElementById('app'));

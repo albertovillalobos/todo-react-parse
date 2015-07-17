@@ -31,10 +31,17 @@ gulp.task('reload', function() {
   console.log('detected change');
 })
 
+gulp.task('reloadcss', function() {
+  gulp.src('style.css')
+    .pipe(connect.reload());
+    console.log('reloading css');
+})
+
 gulp.task('watch', function() {
   gulp.watch('./*.html', ['browserify']);
   gulp.watch('js/*.js', ['browserify']);
   gulp.watch('bundle.js', ['reload']);
+  gulp.watch('style.css', ['reloadcss']);
 })
 
 gulp.task('default', ['webserver', 'watch']);
