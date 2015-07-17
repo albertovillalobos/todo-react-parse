@@ -1,21 +1,34 @@
 var React = require('react');
 var Parse = require('parse').Parse;
+var ParseReact = require('parse-react');
+var $ = require('jQuery');
 
-Parse.initialize("fUnC8PIBgPR26VUGhbsZFH4tStFUFyOZJ6baLo8O", "CkPiEsxSHfqtriaJ266t2yknRXArxBy1lVs5WQvI");
+// console.log($);
+
+Parse.initialize("SedOxWgWCarMJnHhZG4qPznAwkA9oCODrSWnR0mt", "h1Kz38TDuDMh093nB8WdWcu5wpdKoOEXl06PVEjF");
 
 
-var data = [
-  {author: "Pete Hunt", text: "This is one comment"},
-  {author: "how about no?", text: "This is *another* comment"},
-  {author: "how about yeah?", text: "This is *another* comment"},
-  {author: "Oh lol", text: "This is *another* comment"},
-  {author: "asdf", text: "This is *another* comment"},
-  {author: "1243", text: "This is *another* comment"},
-  {author: "nope", text: "This is *another* comment"},
-  {author: "asdfmzx", text: "This is *another* comment"},
-  {author: "asd", text: "This is *another* comment"},
+for (var i = 0; i < 10; i++) {
+  var Comment = Parse.Object.extend("Comment");
+  var comment = new Comment();
+  comment.set("info", "item # "+i);
 
-];
+  comment.save(null, {
+    success: function(object) {
+      console.log("success");
+    },
+
+    error: function(object, error) {
+      console.log("error")
+    }
+
+  })
+}
+
+
+
+
+
 
 
 
@@ -25,18 +38,44 @@ var CommentBox = React.createClass({
     return (
       <div className="commentBox">
         <h1>Comments</h1>
-        <CommentList data={this.props.data} />
+        <CommentList/>
       </div>
     );
   }
 });
 
 var CommentList = React.createClass({
+
+  mixins: [ParseReact.Mixin],
+
+  observe: function() {
+
+
+    var Comment = Parse.Object.extend("Comment");
+    var query = new Parse.Query(Comment);
+    query.find( {
+      success: function(object) {
+        console.log(object);
+      },
+
+      error:  function(object, error) {
+        console.log(object, error);
+      }
+    });
+
+
+    return {
+      comments: (new Parse.Query(Comment))
+    };
+  },
+
   render: function() {
-    var commentNodes = this.props.data.map(function (comment) {
+
+    console.log(this.data);
+    var commentNodes = this.data.comments.map(function (comment) {
       return (
-        <Comment author={comment.author}>
-          {comment.text}
+        <Comment>
+          {comment.info}
         </Comment>
       );
     });
@@ -50,30 +89,20 @@ var CommentList = React.createClass({
   }
 });
 
-var CommentForm = React.createClass({
-  render: function() {
-    return (
-      <div className="commentForm">
-        Hello, world! I am a CommentForm.
-      </div>
-    );
-  }
-});
 
 var Comment = React.createClass({
   render:  function() {
     return (
       <div className="comment">
-        <h2 className="commentAuthor">
-          {this.props.author}
-        </h2>
+        <h2>Comment: </h2>
         {this.props.children}
       </div>
     )
   }
 })
 
+
 React.render(
-  <CommentBox data={data}/>,
+  <CommentBox/>,
   document.getElementById('app')
 );

@@ -20,7 +20,8 @@ gulp.task('browserify', function() {
         // vinyl-source-stream makes the bundle compatible with gulp
         .pipe(source('bundle.js')) // Desired filename
         // Output the file
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./'))
+
 });
 
 gulp.task('reload', function() {
@@ -31,8 +32,9 @@ gulp.task('reload', function() {
 })
 
 gulp.task('watch', function() {
-  gulp.watch('./*.html', ['browserify','reload']);
-  gulp.watch('js/*.js', ['browserify','reload']);
+  gulp.watch('./*.html', ['browserify']);
+  gulp.watch('js/*.js', ['browserify']);
+  gulp.watch('bundle.js', ['reload']);
 })
 
-gulp.task('default', ['browserify','webserver', 'watch']);
+gulp.task('default', ['webserver', 'watch']);
