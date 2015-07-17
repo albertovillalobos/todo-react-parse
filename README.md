@@ -55,10 +55,11 @@ Open it in atom and paste the following:
 ````javascript
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var gulp = require('gulp');
+var connect = require('gulp-connect');
+var watch = require('gulp-watch');
+var babelify = require('babelify');
 
-var gulp = require('gulp'),
-  connect = require('gulp-connect'),
-  watch = require('gulp-watch');
 
 
 gulp.task('webserver', function() {
@@ -67,20 +68,15 @@ gulp.task('webserver', function() {
   });
 });
 
-gulp.task('browserify', function() {
-    return browserify('./src/javascript/app.js').bundle()
-        // vinyl-source-stream makes the bundle compatible with gulp
-        .pipe(source('bundle.js')) // Desired filename
-        // Output the file
-        .pipe(gulp.dest('./build/'));
-});
 
 gulp.task('browserify', function() {
-    return browserify('./js/app.js').bundle()
+
+    return browserify('./js/app.js').transform(babelify).bundle()
         // vinyl-source-stream makes the bundle compatible with gulp
         .pipe(source('bundle.js')) // Desired filename
         // Output the file
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./'))
+
 });
 
 gulp.task('reload', function() {
@@ -91,11 +87,13 @@ gulp.task('reload', function() {
 })
 
 gulp.task('watch', function() {
-  gulp.watch('./*.html', ['browserify','reload']);
-  gulp.watch('js/*.js', ['browserify','reload']);
+  gulp.watch('./*.html', ['browserify']);
+  gulp.watch('js/*.js', ['browserify']);
+  gulp.watch('bundle.js', ['reload']);
 })
 
 gulp.task('default', ['webserver', 'watch']);
+
 
 
 ````
