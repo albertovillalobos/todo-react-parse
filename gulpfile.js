@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var connect = require('gulp-connect');
 var watch = require('gulp-watch');
 var babelify = require('babelify');
-
+var uglify = require('gulp-uglify');
 
 
 gulp.task('webserver', function() {
@@ -17,11 +17,21 @@ gulp.task('webserver', function() {
 gulp.task('browserify', function() {
 
     return browserify('./js/app.js').transform(babelify).bundle()
+
         // vinyl-source-stream makes the bundle compatible with gulp
         .pipe(source('bundle.js')) // Desired filename
         // Output the file
         .pipe(gulp.dest('./'))
 
+
+
+});
+
+
+gulp.task('compress', function() {
+  return gulp.src('bundle.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('./'));
 });
 
 gulp.task('reload', function() {
