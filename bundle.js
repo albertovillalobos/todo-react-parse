@@ -50,7 +50,6 @@ var CommentList = React.createClass({
 
   componentDidMount: function componentDidMount() {
     var refresher = this.refreshQueries;
-    // console.log(this.refreshQueries)
     var interval = setInterval(function () {
       console.log('refreshing');
       refresher();
@@ -81,7 +80,8 @@ var CommentInput = React.createClass({
       placeholder: 'Enter a comment...',
       submit: this.addComment,
       onChange: this.onChange,
-      onKeyDown: this.onKeyDown
+      onKeyDown: this.onKeyDown,
+      maxLength: '80'
     });
   },
 
