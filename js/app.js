@@ -6,6 +6,7 @@ Parse.initialize("SedOxWgWCarMJnHhZG4qPznAwkA9oCODrSWnR0mt", "h1Kz38TDuDMh093nB8
 
 var CommentBox = React.createClass({
   render: function() {
+
     return (
       <div className="commentBox">
         <CommentList/>
@@ -23,6 +24,9 @@ var CommentList = React.createClass({
   },
 
   render: function() {
+
+
+
     // console.log('data',this.data);
     var commentNodes = this.data.comments.map(function (comment) {
       return (
@@ -37,9 +41,18 @@ var CommentList = React.createClass({
         <CommentInput/>
         {commentNodes}
       </div>
-
     )
+  },
+
+  componentDidMount: function() {
+    var refresher = this.refreshQueries;
+    // console.log(this.refreshQueries)
+    var interval = setInterval( function() {
+      console.log('refreshing');
+      refresher();
+    }, 3000)
   }
+
 });
 
 var Comment = React.createClass({
@@ -69,7 +82,11 @@ var CommentInput = React.createClass({
 
   addComment: function() {
     // ParseReact.Mutation.Create("Coment")
-    ParseReact.Mutation.Create('Comment', { info: this.state.value }).dispatch();
+    ParseReact.Mutation.Create('Comment', { info: this.state.value }).dispatch()
+    .then(function() {
+        console.log('refreshing')
+        // this.refreshQueries()
+    }.bind(this));
   },
 
   onChange: function(e) {

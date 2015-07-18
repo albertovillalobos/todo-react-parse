@@ -11,6 +11,7 @@ var CommentBox = React.createClass({
   displayName: 'CommentBox',
 
   render: function render() {
+
     return React.createElement(
       'div',
       { className: 'commentBox' },
@@ -30,6 +31,7 @@ var CommentList = React.createClass({
   },
 
   render: function render() {
+
     // console.log('data',this.data);
     var commentNodes = this.data.comments.map(function (comment) {
       return (
@@ -44,7 +46,17 @@ var CommentList = React.createClass({
       React.createElement(CommentInput, null),
       commentNodes
     );
+  },
+
+  componentDidMount: function componentDidMount() {
+    var refresher = this.refreshQueries;
+    // console.log(this.refreshQueries)
+    var interval = setInterval(function () {
+      console.log('refreshing');
+      refresher();
+    }, 3000);
   }
+
 });
 
 var Comment = React.createClass({
@@ -75,7 +87,9 @@ var CommentInput = React.createClass({
 
   addComment: function addComment() {
     // ParseReact.Mutation.Create("Coment")
-    ParseReact.Mutation.Create('Comment', { info: this.state.value }).dispatch();
+    ParseReact.Mutation.Create('Comment', { info: this.state.value }).dispatch().then((function () {
+      console.log('refreshing');
+    }).bind(this));
   },
 
   onChange: function onChange(e) {
