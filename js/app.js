@@ -6,7 +6,6 @@ Parse.initialize("SedOxWgWCarMJnHhZG4qPznAwkA9oCODrSWnR0mt", "h1Kz38TDuDMh093nB8
 
 var CommentBox = React.createClass({
   render: function() {
-
     return (
       <div className="commentBox">
         <CommentList/>
@@ -17,6 +16,7 @@ var CommentBox = React.createClass({
 
 var CommentList = React.createClass({
   mixins: [ParseReact.Mixin],
+
   observe: function() {
     return {
       comments: (new Parse.Query('Comment').descending("createdAt"))
@@ -24,10 +24,7 @@ var CommentList = React.createClass({
   },
 
   render: function() {
-
-
-
-    // console.log('data',this.data);
+    
     var commentNodes = this.data.comments.map(function (comment) {
       return (
         // <p key={comment.id}>{comment.info}</p>
@@ -54,6 +51,8 @@ var CommentList = React.createClass({
 
 });
 
+
+
 var Comment = React.createClass({
   render: function() {
     return (
@@ -63,6 +62,8 @@ var Comment = React.createClass({
     )
   }
 });
+
+
 
 var CommentInput = React.createClass({
   render: function() {
@@ -101,8 +102,6 @@ var CommentInput = React.createClass({
       e.target.value = '';
     }
   },
-
-
 })
 
 
