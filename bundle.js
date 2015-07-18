@@ -25,7 +25,7 @@ var CommentList = React.createClass({
   mixins: [ParseReact.Mixin],
   observe: function observe() {
     return {
-      comments: new Parse.Query('Comment')
+      comments: new Parse.Query('Comment').descending('createdAt')
     };
   },
 
