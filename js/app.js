@@ -24,7 +24,7 @@ var CommentList = React.createClass({
   },
 
   render: function() {
-    
+
     var commentNodes = this.data.comments.map(function (comment) {
       return (
         // <p key={comment.id}>{comment.info}</p>

@@ -1,5 +1,9 @@
 I'm writing a quick tutorial for a simple to do list using Facebook's React and Parse.
 
+Live at http://192.241.212.180:9005 and http://dank.services/shitposting/
+
+
+
 ###Environment
 - iTerm
 - Node + NPM
