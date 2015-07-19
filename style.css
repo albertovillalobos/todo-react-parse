@@ -12,11 +12,14 @@ body {
   background-color: white;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
 }
 
 .Comment{
   padding: 10px 25px;
   border-bottom: 1px solid #ededed;
+  border-top: 1px solid #ededed;
   font-size: 24px;
   font-weight: 300;
   color: rgb(77, 77, 77);
@@ -26,19 +29,16 @@ body {
 .CommentInput {
   justify-content: center;
   padding: 10px 25px;
-  border-bottom: 1px solid #ededed;
+  /*padding: 0px 25px;*/
+  /*border-bottom: 1px solid #ededed;*/
   font-size: 24px;
   font-weight: 300;
   color: rgb(77, 77, 77);
   -webkit-font-smoothing: antialiased;
   box-shadow: none;
   border: none;
-  border-bottom: 1px solid #ededed;
-}
+  display: block;
 
-.CommentInput input {
-  width: 80%;
-  
 }
 
 
