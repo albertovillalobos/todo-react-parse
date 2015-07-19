@@ -8,6 +8,7 @@ var ParseReact = require('parse-react');
 Parse.initialize('SedOxWgWCarMJnHhZG4qPznAwkA9oCODrSWnR0mt', 'h1Kz38TDuDMh093nB8WdWcu5wpdKoOEXl06PVEjF');
 
 var cooldown = 0;
+var previewsComment = '';
 
 var CommentBox = React.createClass({
   displayName: 'CommentBox',
@@ -106,10 +107,13 @@ var CommentInput = React.createClass({
       if (e.target.value.length > 100) {
         alert('Comment too long, faggot');
         e.target.value = '';
-      }
-      if (cooldown > 0) {
+      } else if (cooldown > 0) {
         alert('wait ' + cooldown + ' seconds to post again');
+      } else if (e.target.value == previewsComment) {
+        alert('Dont double post, jerk!');
+        e.target.value = '';
       } else {
+        previewsComment = e.target.value;
 
         this.addComment();
         e.target.value = '';
