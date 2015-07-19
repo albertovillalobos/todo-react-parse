@@ -36,6 +36,11 @@ body {
   border-bottom: 1px solid #ededed;
 }
 
+.CommentInput input {
+  width: 80%;
+  
+}
+
 
 .CommentList input::-webkit-input-placeholder {
 	font-style: italic;
