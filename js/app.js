@@ -113,7 +113,6 @@ var CommentInput = React.createClass({
 
         this.addComment();
         e.target.value = '';
-
       }
     }
   },
