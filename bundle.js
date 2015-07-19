@@ -7,11 +7,12 @@ var ParseReact = require('parse-react');
 
 Parse.initialize('SedOxWgWCarMJnHhZG4qPznAwkA9oCODrSWnR0mt', 'h1Kz38TDuDMh093nB8WdWcu5wpdKoOEXl06PVEjF');
 
+var cooldown = 0;
+
 var CommentBox = React.createClass({
   displayName: 'CommentBox',
 
   render: function render() {
-
     return React.createElement(
       'div',
       { className: 'commentBox' },
@@ -24,6 +25,7 @@ var CommentList = React.createClass({
   displayName: 'CommentList',
 
   mixins: [ParseReact.Mixin],
+
   observe: function observe() {
     return {
       comments: new Parse.Query('Comment').descending('createdAt')
@@ -32,7 +34,6 @@ var CommentList = React.createClass({
 
   render: function render() {
 
-    // console.log('data',this.data);
     var commentNodes = this.data.comments.map(function (comment) {
       return (
         // <p key={comment.id}>{comment.info}</p>
@@ -86,7 +87,9 @@ var CommentInput = React.createClass({
   },
 
   addComment: function addComment() {
-    // ParseReact.Mutation.Create("Coment")
+
+    cooldown = 5;
+
     ParseReact.Mutation.Create('Comment', { info: this.state.value }).dispatch().then((function () {
       console.log('refreshing');
     }).bind(this));
@@ -100,14 +103,29 @@ var CommentInput = React.createClass({
 
   onKeyDown: function onKeyDown(e) {
     if (e.keyCode === 13) {
-      this.addComment();
-      e.target.value = '';
+      if (e.target.value.length > 100) {
+        alert('Comment too long, faggot');
+        e.target.value = '';
+      }
+      if (cooldown > 0) {
+        alert('wait ' + cooldown + ' seconds to post again');
+      } else {
+
+        this.addComment();
+        e.target.value = '';
+      }
     }
   }
-
 });
 
 React.render(React.createElement(CommentBox, null), document.getElementById('app'));
+
+var coolDownInterval = setInterval(function () {
+  if (cooldown > 0) {
+    cooldown--;
+  }
+  console.log(cooldown);
+}, 1000);
 
 },{"parse":22,"parse-react":3,"react":177}],2:[function(require,module,exports){
 // shim for using process in browser

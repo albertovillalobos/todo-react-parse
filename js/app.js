@@ -4,6 +4,9 @@ var ParseReact = require('parse-react');
 
 Parse.initialize("SedOxWgWCarMJnHhZG4qPznAwkA9oCODrSWnR0mt", "h1Kz38TDuDMh093nB8WdWcu5wpdKoOEXl06PVEjF");
 
+
+var cooldown = 0;
+
 var CommentBox = React.createClass({
   render: function() {
     return (
@@ -82,11 +85,12 @@ var CommentInput = React.createClass({
 
 
   addComment: function() {
-    // ParseReact.Mutation.Create("Coment")
+
+    cooldown  = 5;
+
     ParseReact.Mutation.Create('Comment', { info: this.state.value }).dispatch()
     .then(function() {
         console.log('refreshing')
-        // this.refreshQueries()
     }.bind(this));
   },
 
@@ -98,8 +102,19 @@ var CommentInput = React.createClass({
 
   onKeyDown: function(e) {
     if (e.keyCode === 13) {
-      this.addComment();
-      e.target.value = '';
+      if (e.target.value.length > 100) {
+        alert('Comment too long, faggot');
+        e.target.value = '';
+      }
+      if (cooldown>0) {
+        alert('wait '+cooldown+' seconds to post again');
+      }
+      else {
+
+        this.addComment();
+        e.target.value = '';
+
+      }
     }
   },
 })
@@ -111,3 +126,11 @@ React.render(
   <CommentBox/>,
   document.getElementById('app')
 );
+
+var coolDownInterval = setInterval(function() {
+  if (cooldown>0) {
+    cooldown--;
+
+  }
+  console.log(cooldown)
+}, 1000)
